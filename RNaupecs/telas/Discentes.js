@@ -55,7 +55,7 @@
                           source={require('../assets/menu.png')}
                         />
                       </TouchableOpacity>
-                    
+                     
                      
                     </View>
                   )
@@ -99,7 +99,8 @@
                 },
                 textS:{
                     color:"#FFF",
-                    fontSize:16
+                    fontSize:16,
+                    fontWeight:'bold'
 
                 },
                 textTitle:{

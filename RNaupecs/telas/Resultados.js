@@ -4,9 +4,9 @@ import {Alert, View, Modal,TouchableOpacity, Text,FlatList, StyleSheet } from 'r
 const menuData = [
     { id: 0, name: '1',letra:'A',screenName: ' DetalhesResultados', data:'28-02-2020' },
     { id: 1, name: '2',letra:'A',screenName: ' DetalhesResultados',data:'26-02-2020' },
-    { id: 2, name: '2',letra:'F',screenName: ' DetalhesResultados',data:'15-02-2020' },
-    { id: 3, name: '1',letra:'G',screenName: ' DetalhesResultados',data:'14-02-2020' },
-    { id: 4, name: '1',letra:'D',screenName: ' DetalhesResultados',data:'05-02-2020' },
+    { id: 2, name: '3',letra:'F',screenName: ' DetalhesResultados',data:'15-02-2020' },
+    { id: 3, name: '4',letra:'G',screenName: ' DetalhesResultados',data:'14-02-2020' },
+    { id: 4, name: '5',letra:'D',screenName: ' DetalhesResultados',data:'05-02-2020' },
     
    
   ];
@@ -17,12 +17,17 @@ const menuData = [
 
     <TouchableOpacity
     style={styles.list}
-    onPress={() => {Alert.alert('Detalhes','Acertos: 3 \n Erros: 4 \n Tempo: 40 minutos')}}
+    onPress={() => {Alert.alert('Detalhes','Acertos: 3\nErros: 4\nTempo: 40 minutos')}}
     
 >
       <View style={styles.listItem}>
         
-<Text style={styles.textS} >Nivel: {name}, letra: {letra},  data: {data}</Text>
+<Text style={styles.textS} >Nivel: {name} </Text>
+<Text style={styles.textS} >Letra: {letra}</Text>
+<Text style={styles.textS} >Data: {data}</Text>
+<Text style={styles.textsS} >Exibir detalhes </Text>
+
+
      
 
     </View>
@@ -44,7 +49,7 @@ const menuData = [
      render() {  
          return( 
              
-            <View  style={{flex:1, backgroundColor: '#f3f3f3'}}>
+            <View  style={{flex:1, backgroundColor: '#3CB371'}}>
             <FlatList
                           data={menuData}
                           renderItem={({ item }) => (
@@ -81,16 +86,26 @@ const menuData = [
                 },
               
                 listItem: {
-                  backgroundColor: '#3CB371',
+                  backgroundColor: '#fff',
                   marginTop: 20,
                   padding: 30,
                   flexDirection:'column'
                 },
                 textS:{
-                    color:"#FFF",
-                    fontSize:16
+                  
+                    fontSize:16,
+                   
+                  
 
                 },
+                textsS:{
+                  
+                  fontSize:16,
+                  textDecorationLine: 'underline',
+                  color:'#008000'
+                
+
+              },
                 textTitle:{
                   textAlign: "center",
                   height: 25, 

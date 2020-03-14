@@ -18,6 +18,7 @@ class CustomComponent extends React.Component {
               source={require('../assets/tea.jpg')}
             />
           </View>
+          
           <View style={styles.containerBottomDraw}>
 
         
@@ -32,7 +33,7 @@ class CustomComponent extends React.Component {
             <TouchableOpacity style={styles.containerBottomItemDraw}
               onPress={() => navigate('ScreenB')} >
               <View style={styles.buttonDraw}>
-                <Text style={styles.TxtBottomDraw} >Perfil</Text>
+                <Text style={styles.TxtBottomDraw} >Informações pessoais</Text>
               </View>
             </TouchableOpacity>
 

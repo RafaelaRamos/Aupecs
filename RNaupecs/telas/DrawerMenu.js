@@ -13,7 +13,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 const menuData = [
   { icon:"school",
   name: "Discentes", screenName: "ScreenA", key: 1 },
-  { icon: "person", name: "Perfil", screenName: "ScreenB", key: 2 },
+  { icon: "person", name: "Informações pessoais", screenName: "ScreenB", key: 2 },
   
   {
     icon: "settings" ,
@@ -84,9 +84,9 @@ const styles = StyleSheet.create({
     flexDirection: "row"
   },
   menuItemText: {
-    fontSize: 15,
-    fontWeight: "300",
-    margin: 15
+    fontSize: 16,
+    margin: 15,
+    fontWeight:'bold'
   },
   menuItem: {
     flexDirection: "row"
@@ -100,8 +100,8 @@ const styles = StyleSheet.create({
   }
   ,
   menuItemText: {
-    fontSize: 15,
-    fontWeight: "300",
+    fontSize: 16,
+    fontWeight: "bold",
     margin: 15,
     color: '#fff',
   }, imageTopRowDraw: {

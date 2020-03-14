@@ -31,7 +31,7 @@ class Perfil extends React.Component {
     render() {
       return (
 
-        <View style={{ flex: 1,backgroundColor: '#f3f3f3' }}>
+        <View style={{ flex: 1,backgroundColor: '#f3f3f3', }}>
          <View style={styles.modal}> 
 
            <View style={styles.rowview} > 
@@ -75,7 +75,7 @@ class Perfil extends React.Component {
           </View>
           <ActionButton buttonColor="#3CB371">
         
-        <ActionButton.Item buttonColor='#3CB371' title="Editar informações" onPress={() => { this.setState({show:true})}}>
+        <ActionButton.Item buttonColor='#00BFFF' title="Editar informações" onPress={() => { this.setState({show:true})}}>
           <Icon name="create" style={styles.actionButtonIcon} />
         </ActionButton.Item>
        
@@ -112,28 +112,25 @@ class Perfil extends React.Component {
      
 
   }, modal:{
-    backgroundColor:'#ffff',
+    
   
-   flexDirection:'column',
-    marginTop:100,
-    margin:15,
-    paddingVertical:120,
-    paddingHorizontal:30,
-    borderRadius:10,
-    borderTopWidth: 1,
-    borderEndWidth: 1,
-    borderLeftWidth: 1,
-    borderRightWidth: 1,
-    borderBottomWidth: 1,
-    borderColor: '#3CB371',
-    color:'#000000',
+    flexDirection:'column',
+    marginTop: 2,
+     margin:15,
+     paddingVertical:80,
+     paddingHorizontal:30,
+  
 },
 rowview:{
 
- 
-  
-  flexDirection: 'column',
+  backgroundColor:'#f3f3f3',
+   borderBottomWidth:1,
+  borderColor:'#3CB371',
   alignContent :'space-between',
+  justifyContent:'space-between',
+
+  flexDirection: 'column',
+ 
         
   
 },
@@ -145,8 +142,9 @@ actionButtonIcon: {
 textlabel:{
   fontSize:18,
   
-  
+  marginTop: 10,
   fontStyle:'normal',
+  paddingHorizontal:5
   
   },
   textlabelt:{
@@ -154,7 +152,8 @@ textlabel:{
       fontWeight: 'bold',
       
       fontStyle:'normal',
-      
+      marginTop: 10,
+      paddingHorizontal:5
       }
 
   });

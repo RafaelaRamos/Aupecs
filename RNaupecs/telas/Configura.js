@@ -1,12 +1,38 @@
 import React from 'react';
-import {View,Text,Modal,StyleSheet,TouchableOpacity} from 'react-native';  
+import {View,Text,Modal,StyleSheet,TouchableOpacity,FlatList} from 'react-native';  
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import RNPickerSelect from 'react-native-picker-select';
 
 
+const menuData = [
+    { id: 0, nivel:'1',letra:'B', data:'05-02-2020', status:'pendente',cor:'#FF0000' },
+    { id: 1, nivel:'2',letra:'C', data:'15-02-2020', status:'completa',cor:'#008000' },
+    { id: 2, nivel:'2',letra:'F', data:'16-02-2020', status:'completa',cor:'#008000' },
+    { id: 3, nivel:'1',letra:'C', data:'18-02-2020', status:'pendente',cor:'#FF0000' },
+    { id: 4, nivel:'3',letra:'G', data:'13-02-2020', status:'completa',cor:'#008000' },
+    { id: 5, nivel:'1',letra:'B', data:'06-02-2020', status:'completa',cor:'#008000' },
+    
+   
+  ];
+
+
+  const  ListaItens = ({ nivel,letra,data,status ,cor }) => (
+
+
+   
+      <View style={styles.listItem}>
+      <Text style={styles.textS} >Nivel: {nivel}  </Text>
+      <Text style={styles.textS} >Letra: {letra} </Text>
+      <Text style={styles.textS} >Data: {data}</Text>
+
+    <Text style={{color:cor,fontWeight:'bold',fontSize:16}}>status: {status}</Text>
+    </View>
+  );
+
 
  class Configura extends React.Component{  
+   
 
     constructor(){
         super();
@@ -23,6 +49,21 @@ import RNPickerSelect from 'react-native-picker-select';
 
 
             <View style={{flex:1, backgroundColor: '#f3f3f3'}}>
+
+                    <FlatList
+                          data={menuData}
+                          renderItem={({ item }) => (
+                            <ListaItens
+                             
+                             nivel={item.nivel}
+                             letra= {item.letra}
+                             data={item.data}
+                             status={item.status}
+                             cor={item.cor}
+                              key={item.key}
+                              />
+                            )}
+                          />
 
                 <Modal transparent ={true} visible ={this.state.show} >
 
@@ -74,10 +115,14 @@ import RNPickerSelect from 'react-native-picker-select';
                 </Modal>
 
         <ActionButton buttonColor="#3CB371">
-        
-          <ActionButton.Item buttonColor='#3CB371' title="Nova atividade" onPress={() => { this.setState({show:true})}}>
+        <ActionButton.Item buttonColor='red' borderColor ='#f3f3f3' borderBottomWidth ='0.2' title="Remover atividade" onPress={() => { this.setState({show:true})}}>
+            <Icon name="delete" style={styles.actionButtonIcon} />
+          </ActionButton.Item>
+
+          <ActionButton.Item buttonColor='#00BFFF' borderColor ='#f3f3f3' borderBottomWidth ='0.2' title="Nova atividade" onPress={() => { this.setState({show:true})}}>
             <Icon name="create" style={styles.actionButtonIcon} />
           </ActionButton.Item>
+          
          
         </ActionButton>
 
@@ -155,6 +200,38 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
 
 
+
+    },
+    list: {
+        paddingHorizontal: 20,
+        
+      },
+    
+      listItem: {
+        backgroundColor: '#fff',
+        marginTop: 20,
+        padding:20,
+        marginLeft:20,
+        marginRight:20,
+        flexDirection:'column',
+        borderTopWidth: 1,
+        borderEndWidth: 1,
+        borderLeftWidth: 1,
+        borderRightWidth: 1,
+        borderBottomWidth: 1,
+        borderColor: '#3CB371',
+      },
+      textS:{
+          
+          fontSize:16,
+         
+
+      },
+      textTitle:{
+        textAlign: "center",
+        height: 25, 
+        width: 25,
+       
 
     },
     select:

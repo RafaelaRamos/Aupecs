@@ -49,9 +49,13 @@ const TabScreen = createMaterialTopTabNavigator(
       inactiveTintColor: '#F8F8F8',
       style: {
         backgroundColor: '#3CB371',
+        fontWeight: "bold",
+        
       },
+      
       labelStyle: {
         textAlign: 'center',
+        
       },
       indicatorStyle: {
         borderBottomColor: '#87B56A',

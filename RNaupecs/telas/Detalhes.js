@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   
     listItem: {
       backgroundColor: '#3CB371',
-      marginTop: 20,
+      marginTop: 10,
       padding: 30,
       flexDirection:'column'
     },
@@ -87,29 +87,27 @@ const styles = StyleSheet.create({
      
 
   }, modal:{
-    backgroundColor:'#ffff',
-  
-   flexDirection:'column',
-    marginTop:70,
+    flexDirection:'column',
+   marginTop: 2,
     margin:15,
-    paddingVertical:120,
+    paddingVertical:80,
     paddingHorizontal:30,
-    borderRadius:10,
-    borderTopWidth: 1,
-    borderEndWidth: 1,
-    borderLeftWidth: 1,
-    borderRightWidth: 1,
-    borderBottomWidth: 1,
-    borderColor: '#3CB371',
-    color:'#000000',
 },
 rowview:{
 
- 
   
-  flexDirection: 'column',
+  backgroundColor:'#f3f3f3',
+  
+  
+ 
+  borderBottomWidth:1,
+  borderColor:'#3CB371',
   alignContent :'space-between',
-        
+  justifyContent:'space-between',
+
+  flexDirection: 'column',
+  
+ 
   
 },
 actionButtonIcon: {
@@ -118,17 +116,21 @@ actionButtonIcon: {
   color: 'white',
 },
 textlabel:{
-fontSize:18,
-
-
-fontStyle:'normal',
+  fontSize:18,
+  
+  marginTop: 10,
+  fontStyle:'normal',
+  paddingHorizontal:5
 
 },
 textlabelt:{
-    fontSize:18,
-    fontWeight: 'bold',
-    
-    fontStyle:'normal',
+  fontSize:18,
+  fontWeight: 'bold',
+  
+  fontStyle:'normal',
+  marginTop: 10,
+  paddingHorizontal:5,
+  paddingVertical: 5
     
     }
 
