@@ -1,8 +1,8 @@
 
 import React from 'react';
-import { View,  TextInput, TouchableOpacity, Text } from 'react-native';
+import { View, TextInput,Image, TouchableOpacity, Text } from 'react-native';
 import DatePicker from 'react-native-datepicker';
-import styles from './Style';
+import styles from '../Style';
 
 
 class Cadastro extends React.Component{
@@ -14,9 +14,18 @@ class Cadastro extends React.Component{
     render() {
       return(
        <View  style={styles.containerForm}>
-  
+
+         <View style={styles.containerCadastro} >
+
+          <Image source={require('../assets/oficial.png')}
+              style={{ width: 150, height: 150}} />
+                  <Text style={styles.TitleLogin}> CADASTRO </Text>  
+               
+            
+
+              <View style={styles.containerfm} > 
         <View >
-            <Text > Nome completo:</Text>        
+            <Text  style={styles.testetitle}> Nome completo:</Text>        
              <TextInput style={styles.inputcadS} placeholder="nome ">    </TextInput>
   
              </View >
@@ -28,7 +37,7 @@ class Cadastro extends React.Component{
              <View style={styles.viewCpf}>
   
   
-             <Text >  CPF:</Text> 
+             <Text  style={styles.testetitle} >  CPF:</Text> 
              </View>
   
                
@@ -36,7 +45,7 @@ class Cadastro extends React.Component{
              <View style={styles.data }>
   
   
-             <Text> Nascimento :</Text> 
+             <Text  style={styles.testetitle}> Nascimento :</Text> 
              </View>
   
   
@@ -47,7 +56,7 @@ class Cadastro extends React.Component{
              
             
          <View style={styles.viewrow} >
-            <TextInput style={styles.inputcad } placeholder="cpf" >    </TextInput>
+            <TextInput style={styles.inputcpf } placeholder="cpf" >    </TextInput>
           
            
          <DatePicker
@@ -78,7 +87,7 @@ class Cadastro extends React.Component{
         
         
         <View>
-           <Text >  Formação:</Text>     
+           <Text  style={styles.testetitle} >  Formação:</Text>     
              
             
             
@@ -86,7 +95,7 @@ class Cadastro extends React.Component{
              </View>
   
              <View>
-                <Text >  Email:</Text>     
+                <Text  style={styles.testetitle} >  Email:</Text>     
              
              <TextInput  style={styles.inputcadS} placeholder="email">    </TextInput>
              </View>
@@ -95,12 +104,12 @@ class Cadastro extends React.Component{
            < View style={styles.viewrow}>
   
             <View style={styles.testsenhaa} >
-             <Text >  Senha:</Text>     
+             <Text  style={styles.testetitle} >  Senha:</Text>     
             </View>
   
   
             <View style={styles.testesen }>
-             <Text>  Repetir senha:</Text>     
+             <Text  style={styles.testetitle}>  Repetir senha:</Text>     
              </View>
              </ View>
              
@@ -116,15 +125,18 @@ class Cadastro extends React.Component{
   
              <TouchableOpacity style={styles.botao}>
   
-            <Text  style={styles.botaoText}> Enviar</Text>
+            <Text  style={styles.botaoText}>Cadastre-se</Text>
   
           </TouchableOpacity>
+          </View>
+          </View>
+         
     </View>
    
   );
 
                 }}
 
-                export default Cadastro;
+export default Cadastro;
              
   
