@@ -64,7 +64,7 @@ public class JwtUtils {
     public static boolean checkRole(Collection<? extends GrantedAuthority> authorities, ERole userRole) {
 
         for(GrantedAuthority authority: authorities) {
-            if(authority.getAuthority().contains(ERole.ADMIN.toString()));
+            if(authority.getAuthority().contains(ERole.ADMIN.toString())||authority.getAuthority().contains(ERole.ALUNO.toString() ));
                 return true;
         }
 

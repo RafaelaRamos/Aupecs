@@ -1,5 +1,6 @@
 package ifpb.com.br.AupecApi.config;
 
+import ifpb.com.br.AupecApi.Service.AlunoServiceImpl;
 import ifpb.com.br.AupecApi.Service.UserDetailsServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +33,7 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
 
+
     @Autowired
     private AuthEntryPointJwt unauthorizedHandler;
     @Bean
@@ -61,8 +63,7 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests().antMatchers(HttpMethod.POST, "/api/auth/**").permitAll()
-                .antMatchers("/api/professor/**","/api/aluno/**","/api/relatorio/**","/api/nivel/**").permitAll()
+                .authorizeRequests().antMatchers(HttpMethod.POST, "/api/auth/**","/api/professor").permitAll()
                 .anyRequest().authenticated();
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

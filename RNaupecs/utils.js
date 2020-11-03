@@ -9,6 +9,14 @@ export async function getUser() {
   }
 }
 
+export async function getId() {
+ var user =  await AsyncStorage.getItem('@ListApp:userToken');
+ user = JSON.parse(user)
+console.log(user.id)
+   return user.id
+  }
+
+
 export async function storeUser(userToken) {
   try {
     return await AsyncStorage.setItem('@ListApp:userToken', JSON.stringify(userToken));
@@ -20,6 +28,7 @@ export async function storeUser(userToken) {
 export async function deleteUser() {
   try {
     return await AsyncStorage.removeItem('@ListApp:userToken');
+
   } catch (e) {
     throw e;
   }

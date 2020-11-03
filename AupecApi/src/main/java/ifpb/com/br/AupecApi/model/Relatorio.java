@@ -1,8 +1,10 @@
 package ifpb.com.br.AupecApi.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
@@ -15,12 +17,17 @@ public class Relatorio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @OneToOne
-    private Nivel nivel;
-    private  int acerto;
     private  int erro;
-    private LocalDateTime datahora;
+    @NotNull
+    @Transient
+    private long idAluno;
+    private String letra;
+    private String nivel;
+    @JsonFormat(pattern="dd-MM-yyyy HH:mm")
+    private LocalDateTime dataHora = LocalDateTime.now() ;
     private long tempo;
+    private String status;
+
 
 
 }

@@ -7,26 +7,25 @@ import {
   FlatList,
   Image
 } from "react-native";
-
+import { deleteUser } from '../utils'
+import PropTypes from 'prop-types'
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 const menuData = [
   { icon:"school",
   name: "Discentes", screenName: "ScreenA", key: 1 },
-  { icon: "person", name: "Informações pessoais", screenName: "ScreenB", key: 2 },
+
+
+ 
   
   {
     icon: "settings" ,
     name: "Configurações",
-    screenName: "Log",
-    key: 3
+    screenName: "Config",
+    key: 2
   },
-  {
-    icon: "cancel",
-    name: "Sair",
-    screenName: "Log",
-    key: 4
-  },
+  
+  
 ];
 
 class DrawerMenu extends React.Component {
@@ -35,15 +34,18 @@ class DrawerMenu extends React.Component {
     return (
       <View style={styles.container}>
 
-
+  
   <View style={styles.ContainerImg}>
     <Image
       style={styles.imageTopRowDraw}
       source={require('../assets/oficial.png')}
+
     />
   </View>
-        
+         <View  style={styles.list}>
+
         <FlatList
+        
           data={menuData}
           renderItem={({ item }) => (
             <DrawerItem
@@ -53,8 +55,24 @@ class DrawerMenu extends React.Component {
               name={item.name}
               key={item.key}
             />
+            
           )}
+          
         />
+        </View>
+
+        
+         <TouchableOpacity
+         style={styles.menuItem}
+        onPress={() => (
+          deleteUser().then(() => {
+            this.props.navigation.navigate('AuthLoading')
+          })
+        )} >
+          <Icon name= "close" size={25} color="#fff" style={{ margin: 15 }} />
+        <Text style={styles.menuItemText}>Sair</Text>
+      </TouchableOpacity>
+        
       </View>
     );
   }
@@ -71,6 +89,9 @@ const DrawerItem = ({ navigation, icon, name, screenName }) => (
     <Icon name={icon} size={25} color="#fff" style={{ margin: 15 }} />
     <Text style={styles.menuItemText}>{name}</Text>
   </TouchableOpacity>
+
+  
+  
 );
 
 const styles = StyleSheet.create({
@@ -112,6 +133,19 @@ const styles = StyleSheet.create({
   
     
   },
+  list:{
+    height:100,
+    width:300
+
+
+
+  }
 });
 
 export default DrawerMenu;
+
+DrawerMenu.propTypes = {
+  navigation: PropTypes.shape({
+    dispatch: PropTypes.func,
+  }).isRequired,
+};

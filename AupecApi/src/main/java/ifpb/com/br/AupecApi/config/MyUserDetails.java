@@ -1,5 +1,6 @@
 package ifpb.com.br.AupecApi.config;
 
+import ifpb.com.br.AupecApi.model.Aluno;
 import ifpb.com.br.AupecApi.model.Professor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -32,7 +33,15 @@ public class MyUserDetails implements UserDetails {
                 .collect(Collectors.toList());
     }
 
-
+    public MyUserDetails(Aluno user) {
+        this.id = user.getId();
+        this.email = user.getEmail();
+        this.password = user.getSenha();
+        this.active = user.isActive();
+        this.authorities = Arrays.stream(user.getRole().split(","))
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

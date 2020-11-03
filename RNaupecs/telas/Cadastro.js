@@ -1,142 +1,252 @@
 
-import React from 'react';
-import { View, TextInput,Image, TouchableOpacity, Text } from 'react-native';
-import DatePicker from 'react-native-datepicker';
-import styles from '../Style';
+import React ,{useRef, useState } from 'react';
+import {Image,ScrollView} from 'react-native';
+import { StackActions, NavigationActions } from 'react-navigation'
+import PropTypes from 'prop-types';
+import api from '../service/api'
+import ErrorMessage from './ErrorMessage'
+import * as Yup from 'yup';
+
+import { Formik } from 'formik'
+import {
+
+  Botton,
+  TextBotton,
+  InputCadastro,
+  TextCadastro,
+  Senha,
+  InputFormatado,
+  ContainerForm,
+  ViewQuart,
+  ViewQuint,
+  ViewSext,
+  ViewSet,
+  Title,
+  Error,
+  View,
+  Sucesso
+
+} from './style'
 
 
-class Cadastro extends React.Component{
-
-    constructor(props){
-      super(props)
-      this.state = {date:"09-02-2020"}
-    }
-    render() {
-      return(
-       <View  style={styles.containerForm}>
-
-         <View style={styles.containerCadastro} >
-
-          <Image source={require('../assets/oficial.png')}
-              style={{ width: 150, height: 150}} />
-                  <Text style={styles.TitleLogin}> CADASTRO </Text>  
-               
-            
-
-              <View style={styles.containerfm} > 
-        <View >
-            <Text  style={styles.testetitle}> Nome completo:</Text>        
-             <TextInput style={styles.inputcadS} placeholder="nome ">    </TextInput>
-  
-             </View >
-  
-  
-             
-             <View style={styles.rowteste}> 
-  
-             <View style={styles.viewCpf}>
-  
-  
-             <Text  style={styles.testetitle} >  CPF:</Text> 
-             </View>
-  
-               
-            
-             <View style={styles.data }>
-  
-  
-             <Text  style={styles.testetitle}> Nascimento :</Text> 
-             </View>
-  
-  
-             </View>
-             
-             
-  
-             
-            
-         <View style={styles.viewrow} >
-            <TextInput style={styles.inputcpf } placeholder="cpf" >    </TextInput>
-          
-           
-         <DatePicker
-          style={{width: 120}}
-          date={this.state.date}
-          mode="date"
-          placeholder="select date"
-          format="DD-MM-YYYY"
-          minDate="1930-01-01"
-          maxDate="2020-02-28"
-          confirmBtnText="Confirm"
-          cancelBtnText="Cancel"
-          customStyles={{
-          dateIcon: {
-         position: 'absolute',
-          left: 0,
-          
-          marginLeft: 0
-            },
-            dateInput: {
-              marginLeft: 32,
-              marginTop: 15,
-            }
-            // ... You can check the source to find the other keys.
-          }}
-          onDateChange={(date) => {this.setState({date: date})}} />
-        </View>
-        
-        
-        <View>
-           <Text  style={styles.testetitle} >  Formação:</Text>     
-             
-            
-            
-             <TextInput  style={styles.inputcadS} placeholder="formação">    </TextInput>
-             </View>
-  
-             <View>
-                <Text  style={styles.testetitle} >  Email:</Text>     
-             
-             <TextInput  style={styles.inputcadS} placeholder="email">    </TextInput>
-             </View>
-  
-  
-           < View style={styles.viewrow}>
-  
-            <View style={styles.testsenhaa} >
-             <Text  style={styles.testetitle} >  Senha:</Text>     
-            </View>
-  
-  
-            <View style={styles.testesen }>
-             <Text  style={styles.testetitle}>  Repetir senha:</Text>     
-             </View>
-             </ View>
-             
-             <View style={styles.viewrow}>
-  
-             <TextInput style={styles.inputsenha} secureTextEntry={true} placeholder="senha" >    </TextInput>
-             <TextInput style={styles.inputsenha} secureTextEntry={true} placeholder="confirmar senha">    </TextInput>
-  
-           
-             </View>
-  
-  
-  
-             <TouchableOpacity style={styles.botao}>
-  
-            <Text  style={styles.botaoText}>Cadastre-se</Text>
-  
-          </TouchableOpacity>
-          </View>
-          </View>
-         
-    </View>
+export default function Cadastro (props) {
+  const dataNascimento =useRef(null);
+    const nome = useRef(null);
+    const email = useRef(null);
+    const formacao =useRef(null);
+    const cpf = useRef(null);
+    const senha =useRef(null);
+    const confirmarSenha= useRef(null);
+    const [SucessoMensagem , setSucessoMessage]= useState(null)
+    const [loading, setLoading] = useState(false)
+    
+    const [errorMessage, setErrorMessage] = useState(null)
    
-  );
 
+
+
+    async function handleSubmit(values){
+
+    
+    
+      
+      setLoading(true)
+    
+    if (values.senha !==values.confirmarSenha)
+    return setErrorMessage('senhas não conrespondem')
+    
+
+    
+    
+    else {
+      
+      try {
+        const professor = {
+          nome:values.nome,
+          email:values.email,
+          senha: values.senha,
+          formacao:values.formacao,
+          cpf:values.cpf,
+          dataNascimento:values.dataNascimento
+          
+    }
+
+        
+        const response = await api.post('/professor',professor)
+        setLoading (true)
+        if(loading===true){
+          setErrorMessage('')
+          return   setSucessoMessage('conta criada com sucesso')
+
+        }
+      const resetAction = StackActions.reset({
+        index: 0,
+        actions: [NavigationActions.navigate({ routeName: 'SignIn' })],
+      })
+
+      setLoading(false)
+      
+
+
+      props.navigation.dispatch(resetAction)
+     
+       
+      } catch (_err) {
+        setErrorMessage('Houve um problema com o cadastro, verifique os dados preenchidos!' );
+      }
+    }
+  }
+
+  const FormSchema = Yup.object().shape({
+    nome: Yup.string().required('Preenchimento obrigatório'),
+    cpf: Yup.string().required('Preenchimento obrigatório'),
+    formacao: Yup.string().required('Preenchimento obrigatório'),
+    dataNascimento: Yup.string().required('Preenchimento obrigatório'),
+    email: Yup
+    .string()
+    .email("Insira um email valido")
+    .required('Preenchimento obrigatório'),
+      senha: Yup.string()
+      .required('Preenchimento obrigatório')
+      .min(6, 'Sua senha deve ter no minimo 6 caracteres'),
+      confirmarSenha: Yup.string().oneOf([Yup.ref('senha'), null],'Senhas não consrespondem')
+
+  }); 
+    return (
+      <Formik
+        initialValues={{
+         nome:'',
+         formacao:'',
+         dataNascimento:'',
+         cpf:'',
+         email:'',
+         confirmarSenha:'',
+         senha:''
+        }}
+        onSubmit={values => {
+          handleSubmit(values)
+        }}
+        validationSchema={FormSchema}>
+        {({
+          values,
+          handleChange,
+          handleSubmit,
+          touched,
+          errors
+         
+        }) => (
+          <ScrollView backgroundColor='#1E90FF'>
+      <ContainerForm>
+        <ViewQuart>
+          <Image source={require('../assets/oficial.png')}
+            style={{ width: 150, height: 150 }} />
+          <Title> CADASTRO </Title>
+          {!!errorMessage && <Error>{errorMessage}</Error>}
+          {!!SucessoMensagem && <Sucesso>{SucessoMensagem}</Sucesso>}
+          <View >
+            <TextCadastro > Nome completo:</TextCadastro>
+            
+            <InputCadastro placeholder="Digite seu nome" 
+           ref={nome}
+           onChangeText={handleChange('nome')} values={values.nome}/>  
+               <ErrorMessage errorValue={touched.nome && errors.nome} />
+
+          </View >
+          < ViewSext>
+          <ViewSet >
+              <TextCadastro  > CPF:</TextCadastro>
+            </ViewSet>
+            <ViewSet >
+              <TextCadastro >Nascimento :</TextCadastro>
+              </ViewSet >
+          </ ViewSext>
+          < ViewSext >
+
+          <InputFormatado  
+                type={'cpf'}
+                ref={cpf}
+                value={values.cpf}
+                onChangeText={handleChange('cpf')} 
+              />    
+           <InputFormatado
+                type={'datetime'}
+                options={{
+                  format: 'DD/MM/YYYY'
                 }}
+                ref={dataNascimento}
+                value={values.dataNascimento}
+                onChangeText={handleChange('dataNascimento')}
+              />
+          </ ViewSext>
+          <ViewSext>
+          
+          <ErrorMessage errorValue={touched.cpf && errors.cpf} />
+            
+             </ViewSext>
+          <View>
+            <TextCadastro  >  Formação: </TextCadastro>
+            <InputCadastro placeholder="formação" 
+           ref={formacao}
+           onChangeText={handleChange('formacao')} values={values.formacao}
+           /> 
+           
+           <ErrorMessage errorValue={touched.formacao && errors.formacao} />
+          </View>
+          <View>
+            <TextCadastro   >  Email:</TextCadastro>
+            <InputCadastro placeholder="email" keyboardType={'email-address'}
+           ref={email}
+           onChangeText={handleChange('email')} value={values.email}
+            />    
+              <ErrorMessage errorValue={touched.email && errors.email} />
+          </View>
 
-export default Cadastro;
-             
-  
+          <ViewSext>
+            <ViewSet >
+              <TextCadastro  >  Senha:</TextCadastro>
+            </ViewSet>
+            <ViewSet>
+              <TextCadastro >  Repetir senha:</TextCadastro>
+            </ViewSet>
+          </  ViewSext>
+
+          < ViewSext>
+            <Senha secureTextEntry={true} placeholder="Digite sua senha" 
+            ref={senha}
+            onChangeText={handleChange('senha')} values={values.senha}/>    
+
+            <Senha  secureTextEntry={true}  placeholder="repita sua senha" 
+            ref={confirmarSenha}
+            onChangeText={handleChange('confirmarSenha')} values={values.confirmarSenha}
+            /> 
+          </ ViewSext>
+          < ViewSext >
+          <ErrorMessage errorValue={touched.senha && errors.senha} />
+          <ErrorMessage errorValue={touched.confirmarSenha && errors.confirmarSenha} />
+          </ ViewSext>
+          <Botton onPress={handleSubmit}>
+            <TextBotton  >Cadastre-se</TextBotton>
+
+          </Botton>
+
+        </ViewQuart>
+
+      </ContainerForm>
+      </ScrollView >)}
+      </Formik>
+
+    );
+
+  }
+
+Cadastro.navigationOptions = () => {
+  return {
+    header: null,
+  }
+}
+
+Cadastro.propTypes = {
+  navigation: PropTypes.shape({
+    dispatch: PropTypes.func,
+  }).isRequired,
+}

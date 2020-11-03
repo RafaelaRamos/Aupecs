@@ -1,45 +1,83 @@
 
        import React from 'react';
-       import { View, Image,TouchableOpacity, Text,FlatList, StyleSheet } from 'react-native';       
+     
+       import Icon from 'react-native-vector-icons/FontAwesome';
+       import api from '../service/api';
+      import { getId} from '../utils';
+      import Fab from 'react-native-fab'
+       import { View, Image,TouchableOpacity,FlatList } from 'react-native';  
+       import {
 
-        
-
-              
-       const menuData = [
-        { id: 0, name: 'Pedro Silva',screenName: ' TabScreen' },
-        { id: 1, name: 'Maria dos Santos',screenName: ' TabScreen' },
-        { id: 2, name: 'Eduarda Pereira',screenName: 'TabScreen' },
-        { id: 3, name: 'Jose Silva' ,screenName: 'TabScreen'},
-        { id: 4, name: 'Camila Maria' ,screenName: 'TabScreen'},
-        { id: 5, name: 'Rafaela Ramos' ,screenName: 'TabScreen'},
-        { id: 6, name: 'Joao Luiz ' ,screenName: 'TabScreen'},
-        
-       
-      ];
-
-   
-
-              
-      const  ListaItens = ({ navigation, name,screenName  }) => (
-
-
-        <TouchableOpacity
-        style={styles.list}
-        onPress={() =>
-          navigation.navigate(`${screenName}`, { isStatusBarHidden: false })
-        }
->
-          <View style={styles.listItem}>
-          <Text style={styles.textS} >{name}</Text>
-        </View>
-       
-      </TouchableOpacity>
-
-
+        TextLista,
+        Lista,
+        ListItem,
+        ContainerLista
       
-      );
+      
+      } from '../telas/style';
+       
+
+
+       
+       const  ListaItens = ({nome, navigation,id}) => (
+
+
+       <Lista  onPress={() => navigation.navigate('TabScreen', {id})}>
+        <ListItem>
+        <TextLista> {nome} </TextLista>
+       </ListItem>
+
+        </Lista>
+    );
+  
+      
+      
     
               class Discentes extends React.Component {
+               
+                 
+                
+                constructor(props){
+                  super(props);
+                  this.state = {
+                    
+                    refresh:false,
+                    menuData: [],
+                  
+                  
+                  
+                  }
+                }
+              
+
+                componentDidMount() {
+                  this.getAlunos() }
+
+                  
+                 
+                
+                  async getAlunos(){
+                
+                  var id=  await getId()
+                  const response = await api.get('/alunos',{params:{id:id}} );
+              console.log(response.data)
+                  this.setState({ 
+                    menuData: response.data,
+                    refresh:false
+                  
+                  });
+                  
+                }
+              
+
+              onRefresh() {
+                  this.setState({ refresh: true }, function() { this.getAlunos() });
+               }
+             
+
+
+
+
                 static navigationOptions = ({ navigation }) => ({
                   title:'Lista de Discentes',
                   headerStyle: {
@@ -66,51 +104,39 @@
             
                 
                 render() {
+                
                  
                     return (
-                     <View style={{backgroundColor: '#f3f3f3'}}>
+                     <ContainerLista>
+                       
                       <FlatList
-                          data={menuData}
+                            data= {this.state.menuData}
+              
                           renderItem={({ item }) => (
                             <ListaItens
                               navigation={this.props.navigation}
-                              screenName={item.screenName}
-                              name={item.name}
-                              key={item.key}
+                              nome={item.nome}
+                              id={item.id}
+                              key={item.id}
+                             
                               />
+                             
                             )}
+
+                            onRefresh={() => this.onRefresh()}
+                            refreshing={this.state.refresh}
                           />
-                          </View>
+                          
+                            <Fab buttonColor="#00BFFF"iconTextComponent={<Icon name="user-plus"/>} onClickAction={() =>  this.props.navigation.navigate('CadastrarAluno')} />
+         
+        
+       </ContainerLista>
                     );
                 }
               }
            
 
 
-              const styles = StyleSheet.create({
-                list: {
-                  paddingHorizontal: 20,
-                },
-              
-                listItem: {
-                  backgroundColor: '#1E90FF',
-                  marginTop: 20,
-                  padding: 30,
-                },
-                textS:{
-                    color:"#FFF",
-                    fontSize:16,
-                    fontWeight:'bold'
-
-                },
-                textTitle:{
-                  textAlign: "center",
-                  height: 25, 
-                  width: 25,
-                 
-
-              }
-
-              });
+            
 
               export default Discentes;

@@ -158,9 +158,7 @@ export default StyleSheet.create({
     },
     viewCpf :{
 
-        width: 210,
-   
-        fontSize: 16,
+       
       
     }
 ,

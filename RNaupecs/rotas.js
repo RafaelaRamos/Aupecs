@@ -9,13 +9,23 @@ import Perfil from './telas/Perfil';
 import Cadastro from  './telas/Cadastro';
 import Login from './telas/Login';
 import Resultados from './telas/Resultados';
-import Configura from './telas/Configura';
-import Detalhes from './telas/Detalhes';
-import MenuAluno from './telasAluno/MenuAluno';
+import Configura from './telas/Atividade';
+import Informacoes from './telas/Informacoes';
+import MenuAluno from './jogo/StartJogo';
+import FimDeJogo from './jogo/Fim';
 import {createMaterialTopTabNavigator} from 'react-navigation-tabs';
 import AuthLoadingScreen from './telas/AuthLoadingScreen';
-
-
+import CadastroAluno from './componentesAluno/CadastroAluno';
+import Configuracoes from './telas/Configuracoes';
+import ConfigSenha from './telas/ConfigSenha';
+import SenhaAluno from './componentesAluno/SenhaAluno';
+import ConfigAluno from './componentesAluno/ConfigAluno';
+import NivelI from './jogo/nivelI/NivelUm';
+import StartNivelI from './jogo/nivelI/StartNivelI';
+import NivelII from './jogo/nivelII/NivelDois';
+import StartNivelII from './jogo/nivelII/StartNivelII';
+import NivelIII from './jogo/nivelIII/NivelTres';
+import StartNivelIII from './jogo/nivelIII/StartNivelIII';
 
 console.disableYellowBox = true;
 
@@ -61,6 +71,9 @@ const TabScreen = createMaterialTopTabNavigator(
               const SomeStackNavigator = createStackNavigator({
                 ScreenA: Discentes,
                 ScreenB: Perfil,
+                Config:Configuracoes
+              
+               
                 
                 
                 
@@ -78,6 +91,78 @@ const TabScreen = createMaterialTopTabNavigator(
               );
               
               
+              const AppNavigatorAluno = createStackNavigator(
+
+                {
+                  
+                 
+
+                  Aluno:{
+              
+                    screen: MenuAluno,
+                   
+                  },
+                  SenhaAluno: {
+
+                    screen:SenhaAluno
+                },
+                
+                 
+                  NivelI: {
+
+                    screen:NivelI
+                },
+
+                NivelII: {
+
+                  screen:NivelII
+              },
+
+              NivelIII: {
+
+                screen:NivelIII
+            },
+                StartNivelUm:{
+
+
+                  screen:StartNivelI
+                },
+                StartNivelDois:{
+
+
+                  screen:StartNivelII
+                },
+                ConfigAluno:{
+
+                  screen:ConfigAluno
+
+                },
+                StartNivelTres:{
+
+
+                  screen:StartNivelIII
+                }
+          ,
+
+          Fim:{
+            screen:FimDeJogo
+
+
+          },
+          MenuPrincipal:{
+
+
+            screen:MenuAluno
+          }
+           },      
+
+                {
+                  initialRouteName: 'MenuPrincipal',
+                
+                });
+                const AppAluno = createAppContainer (AppNavigatorAluno);
+
+
 
               const AppNavigator = createStackNavigator(
 
@@ -88,13 +173,17 @@ const TabScreen = createMaterialTopTabNavigator(
                   
                  
                   Informações:
-                  {screen:Detalhes},
+                  {screen:Informacoes},
                   
-                  Aluno:{
-              
-                    screen: MenuAluno,
-                   
+                  
+                  CadastrarAluno:{
+                    screen:CadastroAluno
+
                   },
+                  Senha: {
+
+                    screen:ConfigSenha
+                },
                 
                   TabScreen: {
                     screen: TabScreen,
@@ -120,6 +209,7 @@ const TabScreen = createMaterialTopTabNavigator(
                     {
                       SignIn: Login,
                       App:AppContainer,
+                      Aluno:AppAluno,
                       Cadast: Cadastro
                     },
                     {
@@ -129,12 +219,31 @@ const TabScreen = createMaterialTopTabNavigator(
                     },
                   );
 
+
+
+
+
+
+
+
+
+              
+
+
+
+
+
+
+
+
+
+
                   const RootStack = createSwitchNavigator(
                     {
-                      AuthLoading: AuthLoadingScreen,
+                     AuthLoading: AuthLoadingScreen,
                       Auth: AuthStack,
-                      App: AppContainer
-                     
+                      App: AppContainer,
+                      Aluno:AppAluno
                     },
                     {
                       initialRouteName: 'AuthLoading',

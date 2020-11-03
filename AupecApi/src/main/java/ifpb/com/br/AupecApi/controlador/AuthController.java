@@ -7,6 +7,8 @@ import ifpb.com.br.AupecApi.config.LoginRequest;
 import ifpb.com.br.AupecApi.config.MyUserDetails;
 import ifpb.com.br.AupecApi.repository.ProfessorRepository;
 import ifpb.com.br.AupecApi.repository.RoleRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -29,13 +31,7 @@ public class AuthController {
 
     @Autowired
     AuthenticationManager authenticationManager;
-
-    @Autowired
-    ProfessorRepository userRepository;
-
-    @Autowired
-    RoleRepository roleRepository;
-
+    
     @Autowired
     PasswordEncoder encoder;
 
@@ -43,11 +39,13 @@ public class AuthController {
     JwtUtils jwtUtils;
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
-
+    @Autowired
+    private static Logger logger = LoggerFactory.getLogger(AuthController.class);
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
+logger.info(loginRequest.getEmail());
         HttpHeaders responseHeaders = new HttpHeaders();
 
         Authentication authenticate = authenticationManager.authenticate(

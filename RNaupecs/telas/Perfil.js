@@ -1,8 +1,30 @@
 
  import React from 'react';
- import { View, Image,TouchableOpacity, Text,StyleSheet } from 'react-native'; 
+ import { View, Image,Modal,TouchableOpacity,AsyncStorage, Text,StyleSheet,ScrollView } from 'react-native'; 
  import ActionButton from 'react-native-action-button';    
  import Icon from 'react-native-vector-icons/MaterialIcons';
+ import Fab from 'react-native-fab'
+ import api from '../service/api';
+ import {
+
+  Botton,
+  TextBotton,
+   InputUpdate,
+  TextCadastro,
+  Title,
+  InputFormatadoUP,
+  TextPerfil,
+  Rowview,
+  Exibir,
+  ModalView
+
+
+} from '../telas/style';
+import { Formik } from 'formik'
+import * as Yup from 'yup';
+
+
+ 
 class Perfil extends React.Component {
     static navigationOptions = ({ navigation }) => ({
       title:'Informações pessoais',
@@ -11,149 +33,254 @@ class Perfil extends React.Component {
       },
       headerTintColor: 'white',
                 
-     
-      headerLeft: (
-        <View>
-          <TouchableOpacity onPress={() => navigation.openDrawer()}>
-            <Image
-              style={{ marginLeft: 10, height: 25, width: 25 }}
-              source={require('../assets/menu.png')}
-            />
-          </TouchableOpacity>
-        </View>
-      ),
+    
     });
     constructor(props) {
       super(props);
-      this.state = {};
+
+
+      this.state = {
+         nome:'',
+        cpf:'',
+        formacao:'',
+        email:'',
+        dataNascimento:'',
+        show: false,
+      };
     }
+
+    componentDidMount() {
+      this.getUsuario(); }
+
+
+      cancelar() {
+        this.setState({ show: false })
+        this.getUsuario()
+    
+    
+    
+      }
+
+      async getUsuario(){
+
+        var user =  await AsyncStorage.getItem('@ListApp:userToken');
+        user = JSON.parse(user)
+      
+        try{
+
+       const response = await api.get('/professor',{params:{id:user.id}} );
+  
+          this.setState({ 
+        nome: response.data.nome,
+        cpf:response.data.cpf,
+        formacao:response.data.formacao,
+        dataNascimento:response.data.dataNascimento,
+        email:response.data.email
+      
+        
+        });
+
+        console.log(response.data.nome)
+      
+        }
+        
+   
+        catch{
+          console.log("erro!")
+        }
+        }
+
+        handleSubmit= async(values) => {
+          try {
+      
+            const professor = {
+              nome: values.nome,
+              formacao: values.formacao,
+              cpf: values.cpf,
+              dataNascimento: values.dataNascimento,
+              senha:'1234',
+              email:values.email
+            }
+           
+        var user =  await AsyncStorage.getItem('@ListApp:userToken');
+        user = JSON.parse(user)
+      
+            const response = await api.put('/professor',professor,{params:{id:user.id}})
+            console.log(response)
+            this.setState({ show: false })
+      
+          }catch{
+
+            console.log("Erro!!")
+            this.setState({ show: false })
+          }
+        
+        }
   
     render() {
+
+
+      const FormSchema = Yup.object().shape({
+       
+       
+        email: Yup
+        .string()
+        .email('Inserir email válido')
+        
+      }); 
       return (
 
         <View style={{ flex: 1,backgroundColor: '#f3f3f3', }}>
-         <View style={styles.modal}> 
+         <Exibir> 
 
-           <View style={styles.rowview} > 
-          <Text style={styles.textlabelt}>Nome completo:</Text>
-           <Text style={styles.textlabel}>Maria Santos</Text>
-           </View>
+           <Rowview > 
+          <TextCadastro>Nome completo:</TextCadastro>
+           <TextPerfil> { this.state.nome }</TextPerfil>
+           </Rowview>
 
-          <View style={styles.rowview}>
-            <Text style={styles.textlabelt}>CPF:</Text> 
-          <Text style={styles.textlabel}>555.555.555-54</Text>
-          </View>
-          <View style={styles.rowview}>
-            <Text style={styles.textlabelt}>Telefone:</Text> 
-          <Text style={styles.textlabel}>(83) 5555-5554</Text>
-          </View>
+          <Rowview>
+            <TextCadastro>CPF: </TextCadastro>
+      <TextPerfil>{ this.state.cpf }</TextPerfil>
+          </Rowview>
+       
 
 
-          <View style={styles.rowview}>
+          <Rowview>
 
-          <Text style={styles.textlabelt}>Formação:</Text>
+          <TextCadastro>Formação:</TextCadastro>
 
-           <Text style={styles.textlabel}>Pedagoga</Text>
-           </View>
+      <TextPerfil >{ this.state.formacao}</TextPerfil>
+           </Rowview>
 
-           <View style={styles.rowview}>
-          <Text style={styles.textlabelt}>Data de nascimento:</Text>
-           <Text style={styles.textlabel}>08-03-1989</Text>
-           </View>
-           <View style={styles.rowview}>
-          <Text style={styles.textlabelt}>Codigo:</Text>
-           <Text style={styles.textlabel}>x57a</Text>
-           </View>
+           <Rowview>
+           <TextCadastro>Data de nascimento:</TextCadastro>
+      <TextPerfil>{ this.state.dataNascimento}</TextPerfil>
+           </Rowview>
+           
 
-           <View style={styles.rowview}>
-          <Text style={styles.textlabelt}>Email: </Text>
-           <Text style={styles.textlabel}>maria@gmail.com</Text>
-           </View>
+           <Rowview>
+           <TextCadastro>Email:</TextCadastro>
+      <TextPerfil>{this.state.email}</TextPerfil>
+           </Rowview>
 
           
 
-          </View>
-          <ActionButton buttonColor="#1E90FF">
+          </Exibir>
+          <Fab buttonColor="#00BFFF"iconTextComponent={<Icon name="create"/>} onClickAction={()=> this.setState({ show: true })} />
+         
         
-        <ActionButton.Item buttonColor='#00BFFF' title="Editar informações" onPress={() => { this.setState({show:true})}}>
-          <Icon name="create" style={styles.actionButtonIcon} />
-        </ActionButton.Item>
+
+
+
+
+      <Modal transparent={true} visible={this.state.show} >
+     
+
+      <ScrollView >
+
+<Formik
+      initialValues={{ nome: this.state.nome, formacao: this.state.formacao, dataNascimento: this.state.dataNascimento, email: this.state.email,cpf:this.state.cpf}}
+      onSubmit={values => {
+        this.handleSubmit(values)
+      }}>
+
+{({
+   
+    values,
+    handleChange,
+    handleSubmit,
+    validationSchema={FormSchema} }) =>(
+    
+  <ModalView>
+    <Exibir> 
+
+   <View alignItems="center" >  
+   
+      <Title>Edite informações</Title>
+      </View>
+        <TextCadastro> Nome completo </TextCadastro>
+
+        <InputUpdate
+          name='nome'
+          value={values.nome}
+          onChangeText={handleChange('nome')}
+        />
+  <TextCadastro>CPF</TextCadastro>
+  < InputFormatadoUP
+          name='cpf'
+          type={'cpf'}
+         
+          value={values.cpf}
+          onChangeText={handleChange('cpf')}
+
+
+
+        />
+
+        <TextCadastro> Formação</TextCadastro>
+        <InputUpdate value={values.formacao}
+          name='formacao'
+
+          onChangeText={handleChange('formacao')} />
+           
+
+
+        <TextCadastro>Data nascimento</TextCadastro>
        
-      </ActionButton>
+          
+        < InputFormatadoUP
+          name='data'
+          type={'datetime'}
+          options={{
+            format: 'DD/MM/YYYY'
+          }}
+
+          value={values.dataNascimento}
+          onChangeText={handleChange('dataNascimento')}
+
+
+        />
+
+    
+        <TextCadastro> Email</TextCadastro>
+        <InputUpdate
+          name='email'
+          value={values.email}
+          onChangeText={handleChange('email')}
+        />
+
+<View alignItems="center" >
+        <Botton onPress={handleSubmit}>
+
+          <TextBotton> Salvar</TextBotton>
+
+        </Botton>   
+        
+         <Botton onPress={() => this.setState({ show: false })}>
+
+<TextBotton> Cancelar</TextBotton>
+
+</Botton>  
 
         </View>
+       
+        </Exibir> 
+
+        </ModalView>
+
+     )}
+      
+  </Formik>
+
+ </ScrollView >
+     
+</Modal>
+</View>
+
       );
     }
   }
 
   export default Perfil;
 
-  const styles = StyleSheet.create({
-    list: {
-      paddingHorizontal: 20,
-      
-    },
-  
-    listItem: {
-      backgroundColor: '#1E90FF',
-      marginTop: 20,
-      padding: 30,
-      flexDirection:'column'
-    },
-    textS:{
-        color:"#FFF",
-        fontSize:16
-
-    },
-    textTitle:{
-      textAlign: "center",
-      height: 25, 
-      width: 25,
-     
-
-  }, modal:{
-    
-  
-    flexDirection:'column',
-    marginTop: 2,
-     margin:15,
-     paddingVertical:80,
-     paddingHorizontal:30,
-  
-},
-rowview:{
-
-  backgroundColor:'#f3f3f3',
-   borderBottomWidth:1,
-  borderColor:'#1E90FF',
-  alignContent :'space-between',
-  justifyContent:'space-between',
-
-  flexDirection: 'column',
  
-        
-  
-},
-actionButtonIcon: {
-  fontSize: 20,
-  height: 22,
-  color: 'white',
-},
-textlabel:{
-  fontSize:18,
-  
-  marginTop: 10,
-  fontStyle:'normal',
-  paddingHorizontal:5
-  
-  },
-  textlabelt:{
-      fontSize:18,
-      fontWeight: 'bold',
-      
-      fontStyle:'normal',
-      marginTop: 10,
-      paddingHorizontal:5
-      }
-
-  });
