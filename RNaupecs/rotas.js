@@ -1,19 +1,19 @@
 import React from 'react';
 
-import {createStackNavigator} from 'react-navigation-stack';
-import {createAppContainer,createSwitchNavigator} from 'react-navigation';
-import {createDrawerNavigator} from 'react-navigation-drawer';
+import { createStackNavigator } from 'react-navigation-stack';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createDrawerNavigator } from 'react-navigation-drawer';
 import DrawerMenu from './telas/DrawerMenu';
 import Discentes from './telas/Discentes';
 import Perfil from './telas/Perfil';
-import Cadastro from  './telas/Cadastro';
+import Cadastro from './telas/Cadastro';
 import Login from './telas/Login';
 import Resultados from './telas/Resultados';
 import Configura from './telas/Atividade';
 import Informacoes from './telas/Informacoes';
 import MenuAluno from './jogo/StartJogo';
 import FimDeJogo from './jogo/Fim';
-import {createMaterialTopTabNavigator} from 'react-navigation-tabs';
+import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 import AuthLoadingScreen from './telas/AuthLoadingScreen';
 import CadastroAluno from './componentesAluno/CadastroAluno';
 import Configuracoes from './telas/Configuracoes';
@@ -31,12 +31,12 @@ console.disableYellowBox = true;
 
 const TabScreen = createMaterialTopTabNavigator(
   {
-    
-    Atividade:Configura,
-    Relatorios:Resultados
-    
 
-    
+    Atividade: Configura,
+    Relatorios: Resultados
+
+
+
   },
   {
     tabBarPosition: 'top',
@@ -47,14 +47,14 @@ const TabScreen = createMaterialTopTabNavigator(
       inactiveTintColor: '#F8F8F8',
       style: {
         backgroundColor: '#1E90FF',
-       
-        
+
+
       },
-      
+
       labelStyle: {
         textAlign: 'center',
         fontWeight: "bold",
-        fontSize:14
+        fontSize: 14
       },
       indicatorStyle: {
         borderBottomColor: '#87B56A',
@@ -67,167 +67,160 @@ const TabScreen = createMaterialTopTabNavigator(
 
 
 
-      
-              const SomeStackNavigator = createStackNavigator({
-                ScreenA: Discentes,
-                ScreenB: Perfil,
-                Config:Configuracoes
-              
-               
-                
-                
-                
-              });
-  
-              const AppStack = createDrawerNavigator({
-                
-                SomeStackNavigator,
-               
-                },
-                
-                {
-                  contentComponent: DrawerMenu 
-                }
-              );
-              
-              
-              const AppNavigatorAluno = createStackNavigator(
 
-                {
-                  
-                 
-
-                  Aluno:{
-              
-                    screen: MenuAluno,
-                   
-                  },
-                  SenhaAluno: {
-
-                    screen:SenhaAluno
-                },
-                
-                 
-                  NivelI: {
-
-                    screen:NivelI
-                },
-
-                NivelII: {
-
-                  screen:NivelII
-              },
-
-              NivelIII: {
-
-                screen:NivelIII
-            },
-                StartNivelUm:{
-
-
-                  screen:StartNivelI
-                },
-                StartNivelDois:{
-
-
-                  screen:StartNivelII
-                },
-                ConfigAluno:{
-
-                  screen:ConfigAluno
-
-                },
-                StartNivelTres:{
-
-
-                  screen:StartNivelIII
-                }
-          ,
-
-          Fim:{
-            screen:FimDeJogo
-
-
-          },
-          MenuPrincipal:{
-
-
-            screen:MenuAluno
-          }
-           },      
-
-                {
-                  initialRouteName: 'MenuPrincipal',
-                
-                });
-                const AppAluno = createAppContainer (AppNavigatorAluno);
-
-
-
-              const AppNavigator = createStackNavigator(
-
-                {App: { screen: AppStack,
-                  navigationOptions: {
-                  header: null,
-                }},
-                  
-                 
-                  Informações:
-                  {screen:Informacoes},
-                  
-                  
-                  CadastrarAluno:{
-                    screen:CadastroAluno
-
-                  },
-                  Senha: {
-
-                    screen:ConfigSenha
-                },
-                
-                  TabScreen: {
-                    screen: TabScreen,
-                    navigationOptions: {
-                      headerStyle: {
-                        backgroundColor: '#1E90FF',
-                      },
-                      headerTintColor: '#FFFFFF',
-                      title: 'Discente',
-                    },
-                  },
-                  
-                },      
-                
-                {
-                  initialRouteName: 'App',
-                
-                });
-                const AppContainer = createAppContainer (AppNavigator);
-
-
-                const AuthStack = createStackNavigator(
-                    {
-                      SignIn: Login,
-                      App:AppContainer,
-                      Aluno:AppAluno,
-                      Cadast: Cadastro
-                    },
-                    {
-                      initialRouteName: 'SignIn',
-                      headerMode: 'none',
-                      header: null,
-                    },
-                  );
+const SomeStackNavigator = createStackNavigator({
+  ScreenA: Discentes,
+  ScreenB: Perfil,
+  Config: Configuracoes
 
 
 
 
 
+});
+
+const AppStack = createDrawerNavigator({
+
+  SomeStackNavigator,
+
+},
+
+  {
+    contentComponent: DrawerMenu
+  }
+);
+
+
+const AppNavigatorAluno = createStackNavigator(
+
+  {
 
 
 
+    Aluno: {
 
-              
+      screen: MenuAluno,
+
+    },
+    SenhaAluno: {
+
+      screen: SenhaAluno
+    },
+
+
+    NivelI: {
+
+      screen: NivelI
+    },
+
+    NivelII: {
+
+      screen: NivelII
+    },
+
+    NivelIII: {
+
+      screen: NivelIII
+    },
+    StartNivelUm: {
+
+
+      screen: StartNivelI
+    },
+    StartNivelDois: {
+
+
+      screen: StartNivelII
+    },
+    ConfigAluno: {
+
+      screen: ConfigAluno
+
+    },
+    StartNivelTres: {
+
+
+      screen: StartNivelIII
+    }
+    ,
+
+    Fim: {
+      screen: FimDeJogo
+
+
+    },
+    MenuPrincipal: {
+
+
+      screen: MenuAluno
+    }
+  },
+
+  {
+    initialRouteName: 'MenuPrincipal',
+
+  });
+const AppAluno = createAppContainer(AppNavigatorAluno);
+
+
+
+const AppNavigator = createStackNavigator(
+
+  {
+    App: {
+      screen: AppStack,
+      navigationOptions: {
+        header: null,
+      }
+    },
+
+
+    Informações:
+      { screen: Informacoes },
+
+
+    CadastrarAluno: {
+      screen: CadastroAluno
+
+    },
+    Senha: {
+
+      screen: ConfigSenha
+    },
+
+    TabScreen: {
+      screen: TabScreen,
+      navigationOptions: {
+        headerStyle: {
+          backgroundColor: '#1E90FF',
+        },
+        headerTintColor: '#FFFFFF',
+        title: 'Discente',
+      },
+    },
+
+  },
+
+  {
+    initialRouteName: 'App',
+
+  });
+const AppContainer = createAppContainer(AppNavigator);
+
+
+const AuthStack = createStackNavigator(
+  {
+    SignIn: Login,
+    App: AppContainer,
+    Aluno: AppAluno,
+    Cadast: Cadastro
+  },
+  {
+    initialRouteName: 'SignIn',
+    headerMode: 'none',
+    header: null,
+  },
+);
 
 
 
@@ -238,18 +231,28 @@ const TabScreen = createMaterialTopTabNavigator(
 
 
 
-                  const RootStack = createSwitchNavigator(
-                    {
-                     AuthLoading: AuthLoadingScreen,
-                      Auth: AuthStack,
-                      App: AppContainer,
-                      Aluno:AppAluno
-                    },
-                    {
-                      initialRouteName: 'AuthLoading',
-                    },
-                  );
-                  
-                  const RootStackContainer = createAppContainer(RootStack);
-             
-                export default RootStackContainer;
+
+
+
+
+
+
+
+
+
+
+const RootStack = createSwitchNavigator(
+  {
+    AuthLoading: AuthLoadingScreen,
+    Auth: AuthStack,
+    App: AppContainer,
+    Aluno: AppAluno
+  },
+  {
+    initialRouteName: 'AuthLoading',
+  },
+);
+
+const RootStackContainer = createAppContainer(RootStack);
+
+export default RootStackContainer;

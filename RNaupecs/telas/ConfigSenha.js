@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 import { Formik } from 'formik'
 import React, { useRef, useState } from 'react';
-import { View,AsyncStorage} from 'react-native';
+import { View, AsyncStorage } from 'react-native';
 import PropTypes from 'prop-types';
 
 import api from '../service/api'
@@ -28,33 +28,34 @@ export default function ConfigSenha(props) {
 
 
   async function handleSubmit(values) {
-    if (values.senha !==values.confirmarSenha)
-    return setErrorMessage('senhas não conrespondem')
-    
+    if (values.senha !== values.confirmarSenha)
+      return setErrorMessage('senhas não conrespondem')
 
-    
-    
+
+
+
     else {
-    try{
+      try {
 
-      var user = await AsyncStorage.getItem('@ListApp:userToken');
-      user = JSON.parse(user)
+        var user = await AsyncStorage.getItem('@ListApp:userToken');
+        user = JSON.parse(user)
         const Senha = {
-        senhaAtual: values.senhaAtual,
-        senha: values.senha, }
-      console.log(Senha)
-      const response = await api.put('/redifinirsenha', Senha, { params:{id:1} })
-      setErrorMessage('')
-      return setSucessoMessage('Alteração bem sucedida')
+          senhaAtual: values.senhaAtual,
+          senha: values.senha,
         }
-        catch{
+        console.log(Senha)
+        const response = await api.put('/redifinirsenha', Senha, { params: { id: 1 } })
+        setErrorMessage('')
+        return setSucessoMessage('Alteração bem sucedida')
+      }
+      catch {
 
 
         setErrorMessage('Senha atual invalida')
-        }
       }
-  
-}
+    }
+
+  }
 
 
   const FormSchema = Yup.object().shape({
@@ -63,7 +64,7 @@ export default function ConfigSenha(props) {
     senha: Yup.string()
       .required('Campo obrigatório')
       .min(6, 'Sua senha deve ter no minimo 6 caracteres'),
-    confirmarSenha: Yup.string().oneOf([Yup.ref('senha'), null],'Senhas não consrespondem')
+    confirmarSenha: Yup.string().oneOf([Yup.ref('senha'), null], 'Senhas não consrespondem')
 
 
   });
@@ -109,7 +110,7 @@ export default function ConfigSenha(props) {
 
               <InputSenha placeholder="Repita a nova senha" secureTextEntry={true} ref={confirmarSenha}
                 onChangeText={handleChange('confirmarSenha')} values={values.confirmarSenha} />
-            
+
               <ErrorMessage errorValue={touched.confirmarSenha && errors.confirmarSenha} />
 
               <BottonSenha onPress={handleSubmit}>

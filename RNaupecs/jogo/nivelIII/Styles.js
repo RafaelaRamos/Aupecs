@@ -14,7 +14,6 @@ display:flex;
 flex:1;
 borderColor:#f3f3f3;
 borderWidth:1;
-
 backgroundColor:#1E90FF;
 borderColor:#f3f3f3;
 borderWidth:8;
@@ -66,8 +65,8 @@ flex: 1;
 
 `
         ;
-        
-        export const Teste = styled.View`
+
+export const Teste = styled.View`
 
 
 backgroundColor: #f3f3f3;

@@ -12,74 +12,76 @@ import PropTypes from 'prop-types'
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 const menuData = [
-  { icon:"school",
-  name: "Discentes", screenName: "ScreenA", key: 1 },
-
-
- 
-  
   {
-    icon: "settings" ,
+    icon: "school",
+    name: "Discentes", screenName: "ScreenA", key: 1
+  },
+
+
+
+
+  {
+    icon: "settings",
     name: "Configurações",
     screenName: "Config",
     key: 2
   },
-  
-  
+
+
 ];
 
 class DrawerMenu extends React.Component {
-   
+
   render() {
     return (
       <View style={styles.container}>
 
-  
-  <View style={styles.ContainerImg}>
-    <Image
-      style={styles.imageTopRowDraw}
-      source={require('../assets/oficial.png')}
 
-    />
-  </View>
-         <View  style={styles.list}>
+        <View style={styles.ContainerImg}>
+          <Image
+            style={styles.imageTopRowDraw}
+            source={require('../assets/oficial.png')}
 
-        <FlatList
-        
-          data={menuData}
-          renderItem={({ item }) => (
-            <DrawerItem
-              navigation={this.props.navigation}
-              screenName={item.screenName}
-              icon={item.icon}
-              name={item.name}
-              key={item.key}
-            />
-            
-          )}
-          
-        />
+          />
+        </View>
+        <View style={styles.list}>
+
+          <FlatList
+
+            data={menuData}
+            renderItem={({ item }) => (
+              <DrawerItem
+                navigation={this.props.navigation}
+                screenName={item.screenName}
+                icon={item.icon}
+                name={item.name}
+                key={item.key}
+              />
+
+            )}
+
+          />
         </View>
 
-        
-         <TouchableOpacity
-         style={styles.menuItem}
-        onPress={() => (
-          deleteUser().then(() => {
-            this.props.navigation.navigate('AuthLoading')
-          })
-        )} >
-          <Icon name= "close" size={25} color="#fff" style={{ margin: 15 }} />
-        <Text style={styles.menuItemText}>Sair</Text>
-      </TouchableOpacity>
-        
+
+        <TouchableOpacity
+          style={styles.menuItem}
+          onPress={() => (
+            deleteUser().then(() => {
+              this.props.navigation.navigate('AuthLoading')
+            })
+          )} >
+          <Icon name="close" size={25} color="#fff" style={{ margin: 15 }} />
+          <Text style={styles.menuItemText}>Sair</Text>
+        </TouchableOpacity>
+
       </View>
     );
   }
 }
 
 const DrawerItem = ({ navigation, icon, name, screenName }) => (
-  
+
   <TouchableOpacity
     style={styles.menuItem}
     onPress={() =>
@@ -90,8 +92,8 @@ const DrawerItem = ({ navigation, icon, name, screenName }) => (
     <Text style={styles.menuItemText}>{name}</Text>
   </TouchableOpacity>
 
-  
-  
+
+
 );
 
 const styles = StyleSheet.create({
@@ -99,7 +101,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#6495ED',
     paddingTop: 70,
-   
+
   },
   menuItem: {
     flexDirection: "row"
@@ -107,12 +109,12 @@ const styles = StyleSheet.create({
   menuItemText: {
     fontSize: 16,
     margin: 15,
-    fontWeight:'bold'
+    fontWeight: 'bold'
   },
   menuItem: {
     flexDirection: "row"
   },
-  ContainerImg:{
+  ContainerImg: {
     marginTop: 10,
     marginLeft: 10,
     justifyContent: "center",
@@ -125,17 +127,17 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     margin: 15,
     color: '#fff',
-  }, 
-  
+  },
+
   imageTopRowDraw: {
     height: 150,
     width: 160,
-  
-    
+
+
   },
-  list:{
-    height:100,
-    width:300
+  list: {
+    height: 100,
+    width: 300
 
 
 

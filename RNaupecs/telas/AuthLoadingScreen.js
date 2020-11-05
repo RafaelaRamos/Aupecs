@@ -7,13 +7,13 @@ export default function AuthLoadingScreen(props) {
   useEffect(() => {
     async function handleUserNextScreen() {
       const userToken = await AsyncStorage.getItem('@ListApp:userToken')
-     
-     
+
+
       props.navigation.navigate(userToken ? 'App' : 'Auth')
 
-      
-    
-  }
+
+
+    }
 
     handleUserNextScreen();
   }, []);

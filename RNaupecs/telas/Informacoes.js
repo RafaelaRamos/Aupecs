@@ -13,7 +13,7 @@ import { StackActions, NavigationActions } from 'react-navigation'
 import {
   Botton,
   TextBotton,
-   InputUpdate,
+  InputUpdate,
   TextCadastro,
   Title,
   InputFormatadoUP,
@@ -63,7 +63,7 @@ class Informacoes extends React.Component {
         filiacao: response.data.filiacao,
         dataNascimento: response.data.dataNascimento,
 
-  });
+      });
 
 
 
@@ -72,7 +72,7 @@ class Informacoes extends React.Component {
     }
 
 
-    catch{
+    catch {
       console.log("erro!")
     }
   }
@@ -97,7 +97,7 @@ class Informacoes extends React.Component {
   }
 
 
-  handleSubmit= async(values) => {
+  handleSubmit = async (values) => {
     try {
 
       const aluno = {
@@ -106,18 +106,18 @@ class Informacoes extends React.Component {
         filiacao: values.filiacao,
         objetivos: values.objetivos,
         dataNascimento: values.dataNascimento,
-        
+
       }
       id = this.props.navigation.state.params.idteste
 
-      const response = await api.put('/aluno',aluno,{params:{id:id}})
+      const response = await api.put('/aluno', aluno, { params: { id: id } })
       console.log(response)
       this.setState({ show: false })
 
     }
 
 
-    catch{
+    catch {
       console.log('erro!!!'
       )
       this.cancelar()
@@ -134,7 +134,7 @@ class Informacoes extends React.Component {
       const response = await api.delete('/aluno', { params: { id: id } })
     }
 
-    catch{
+    catch {
       console.log('erro!!!')
     }
 
@@ -148,7 +148,7 @@ class Informacoes extends React.Component {
   }
 
 
-  
+
 
 
 
@@ -165,7 +165,7 @@ class Informacoes extends React.Component {
 
 
   render() {
-    
+
     return (
       <View style={{ flex: 1, backgroundColor: '#f3f3f3' }}>
         <Exibir>
@@ -202,7 +202,7 @@ class Informacoes extends React.Component {
 
 
         </Exibir>
-        
+
         <ActionButton buttonColor="#1E90FF">
           <ActionButton.Item buttonColor='red' borderColor='#f3f3f3' borderBottomWidth='0.2' title="Remover Aluno" onPress={() => { this.openAlert() }}>
             <Icon name="user-times" style={styles.actionButtonIcon} />
@@ -217,82 +217,82 @@ class Informacoes extends React.Component {
 
         <Modal transparent={true} visible={this.state.show} >
 
-        <ModalView>
+          <ModalView>
 
-        <Formik
+            <Formik
               initialValues={{ nome: this.state.nome, filiacao: this.state.filiacao, dataNascimento: this.state.dataNascimento, objetivos: this.state.objetivos }}
               onSubmit={values => {
                 this.handleSubmit(values)
               }}>
 
-{({
-           
-            values,
-            handleChange,
-            handleSubmit,
-            
-          }) =>(
-            <ScrollView >
-          
-            <Exibir> 
-          
-          <View alignItems="center" >  
-               <Title>Edite informações</Title>
-       </View>
+              {({
 
-                <TextCadastro> Nome </TextCadastro>
+                values,
+                handleChange,
+                handleSubmit,
 
-                <InputUpdate
-                  name='nome'
-                  value={values.nome}
-                  onChangeText={handleChange('nome')}
+              }) => (
+                  <ScrollView >
 
-  />
-                <TextCadastro> Filiacao</TextCadastro>
-                <InputUpdate value={values.filiacao}
-                  name='filiacao'
-                  onChangeText={handleChange('filiacao')} />
-                <TextCadastro>Data nascimento</TextCadastro>
+                    <Exibir>
 
-                < InputFormatadoUP
-                  name='data'
-                  type={'datetime'}
-                  options={{
-                    format: 'DD/MM/YYYY'
-                  }}
+                      <View alignItems="center" >
+                        <Title>Edite informações</Title>
+                      </View>
 
-                  value={values.dataNascimento}
-                  onChangeText={handleChange('dataNascimento')}
+                      <TextCadastro> Nome </TextCadastro>
+
+                      <InputUpdate
+                        name='nome'
+                        value={values.nome}
+                        onChangeText={handleChange('nome')}
+
+                      />
+                      <TextCadastro> Filiacao</TextCadastro>
+                      <InputUpdate value={values.filiacao}
+                        name='filiacao'
+                        onChangeText={handleChange('filiacao')} />
+                      <TextCadastro>Data nascimento</TextCadastro>
+
+                      < InputFormatadoUP
+                        name='data'
+                        type={'datetime'}
+                        options={{
+                          format: 'DD/MM/YYYY'
+                        }}
+
+                        value={values.dataNascimento}
+                        onChangeText={handleChange('dataNascimento')}
 
 
-                />
-                <TextCadastro> Objetivos</TextCadastro>
-                <InputUpdate
-                  name='objetivos'
-                  value={values.objetivos}
-                  onChangeText={handleChange('objetivos')}
-                />
+                      />
+                      <TextCadastro> Objetivos</TextCadastro>
+                      <InputUpdate
+                        name='objetivos'
+                        value={values.objetivos}
+                        onChangeText={handleChange('objetivos')}
+                      />
 
-<View alignItems="center" >
-                <Botton onPress={handleSubmit}>
+                      <View alignItems="center" >
+                        <Botton onPress={handleSubmit}>
 
-                  <TextBotton> Editar</TextBotton>
+                          <TextBotton> Editar</TextBotton>
 
-                </Botton> 
+                        </Botton>
 
-                 <Botton onPress={() => this.setState({ show: false })}>
+                        <Botton onPress={() => this.setState({ show: false })}>
 
-          <TextBotton> Cancelar</TextBotton>
+                          <TextBotton> Cancelar</TextBotton>
 
-          </Botton> 
-                </View >
+                        </Botton>
+                      </View >
 
-            </Exibir> 
-            </ScrollView >)}
-           
-             
-          </Formik>
-         
+                    </Exibir>
+                  </ScrollView >)}
+
+
+            </Formik>
+
           </ModalView>
         </Modal>
       </View>
