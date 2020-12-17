@@ -33,7 +33,7 @@ const TabScreen = createMaterialTopTabNavigator(
   {
 
     Atividade: Configura,
-    Relatorios: Resultados
+    Resultados: Resultados
 
 
 
@@ -221,24 +221,6 @@ const AuthStack = createStackNavigator(
     header: null,
   },
 );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 const RootStack = createSwitchNavigator(

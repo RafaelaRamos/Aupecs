@@ -7,9 +7,6 @@ const menuData = [
   { id: 0, name: 'FOGUETES DE LETRAS', img: require("../assets/teste.png"), screen: "StartNivelUm" },
   { id: 1, name: 'FORMAR PALAVRAS', img: require("../assets/teste2.png"), screen: "StartNivelDois" },
   { id: 2, name: 'TECLADOS DE LETRAS', img: require("../assets/teste3.png"), screen: "StartNivelTres" },
-
-
-
 ];
 
 
@@ -19,18 +16,12 @@ const ListaItens = ({ navigation, name, img, screen }) => (
 
 
   <TouchableOpacity
-    style={styles.list} onPress={() => navigation.navigate(screen)}
-
-  >
+    style={styles.list} onPress={() => navigation.navigate(screen)}>
     <View style={styles.listItem}>
       < ImageBackground source={img} resizeMode={'cover'}
         style={{ flex: 1 }}>
-
-
         <View style={styles.div}>
-
           <Text style={styles.textS} >{name}</Text>
-
         </View>
       </ImageBackground>
     </View>
@@ -54,18 +45,9 @@ class MenuAluno extends React.Component {
     headerTintColor: 'white',
     headerRight: (
       <TouchableOpacity onPress={() => navigation.navigate('ConfigAluno')}>
-
-
-
         <Icon name="settings" size={28} color="#fff" style={{ marginRight: 30, height: 25, width: 25 }} />
-
-
-
       </TouchableOpacity>
-
     ),
-
-
   });
 
 
@@ -134,13 +116,10 @@ const styles = StyleSheet.create({
     height: 35,
     marginTop: 160,
     borderEndWidth: 4,
-
     borderRightWidth: 4,
-
     borderColor: '#FFF',
     borderTopWidth: 4,
     alignItems: 'stretch',
-
     padding: 10,
 
   },
@@ -148,10 +127,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     height: 25,
     width: 25,
-
-
-
-
   }
 
 });

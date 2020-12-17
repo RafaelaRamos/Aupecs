@@ -53,6 +53,9 @@
        return  randOrd(array)
  
    }
+
+
+   
     export function arrayEquals(a, b) {
       var cont=0;
          for(var i=0; i<a.length; i++){

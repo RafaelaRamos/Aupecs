@@ -529,6 +529,12 @@ marginRight:20;
 
 
 `;
+export const FlatList =styled.FlatList`
+
+
+
+
+`;
 
 export const TextListI=styled.Text`
 fontSize:14;

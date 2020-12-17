@@ -10,17 +10,13 @@ import PropTypes from 'prop-types'
 
 
 export default function ListaGrade({ data, navigation, fase }) {
-
-  let letra = data.letra;
-
-
+   let letra = data.letra;
   if (data.empty) {
     return <View style={[styles.item, styles.itemEmpty]} />;
   }
   return (
     <TouchableOpacity style={styles.item} onPress={() => navigation.navigate(fase, { letra })} >
-
-      <Text style={styles.text}>{data.letra}</Text>
+    <Text style={styles.text}>{data.letra}</Text>
     </TouchableOpacity>
 
   );

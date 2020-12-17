@@ -4,12 +4,14 @@ import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import api from '../service/api';
 import { getId } from '../utils';
+import { SearchBar } from 'react-native-elements';
 import Fab from 'react-native-fab'
-import { View, Image, TouchableOpacity, FlatList } from 'react-native';
+import { View, Image, TouchableOpacity } from 'react-native';
 import {
 
   TextLista,
   Lista,
+  FlatList,
   ListItem,
   ContainerLista
 
@@ -43,10 +45,11 @@ class Discentes extends React.Component {
 
       refresh: false,
       menuData: [],
-
+      
 
 
     }
+    this.data = [];
   }
 
 
@@ -54,8 +57,7 @@ class Discentes extends React.Component {
     this.getAlunos()
   }
 
-
-
+  
 
   async getAlunos() {
 
@@ -67,17 +69,18 @@ class Discentes extends React.Component {
       refresh: false
 
     });
-
+    
+    
   }
-
 
   onRefresh() {
     this.setState({ refresh: true }, function () { this.getAlunos() });
   }
 
+ 
 
 
-
+  
 
   static navigationOptions = ({ navigation }) => ({
     title: 'Lista de Discentes',
@@ -85,7 +88,7 @@ class Discentes extends React.Component {
       backgroundColor: '#1E90FF'
     },
     headerTintColor: 'white',
-
+   
     headerLeft: (
       <View>
         <TouchableOpacity onPress={() => navigation.openDrawer()}>
@@ -94,10 +97,11 @@ class Discentes extends React.Component {
             source={require('../assets/menu.png')}
           />
         </TouchableOpacity>
-
+       
 
       </View>
     )
+  
   });
 
 
@@ -126,18 +130,15 @@ class Discentes extends React.Component {
 
           onRefresh={() => this.onRefresh()}
           refreshing={this.state.refresh}
+        
         />
 
-        <Fab buttonColor="#00BFFF" iconTextComponent={<Icon name="user-plus" />} onClickAction={() => this.props.navigation.navigate('CadastrarAluno')} />
+        <Fab buttonColor='#6495ED' iconTextComponent={<Icon name="user-plus" />} onClickAction={() => this.props.navigation.navigate('CadastrarAluno')} />
 
 
       </ContainerLista>
     );
   }
 }
-
-
-
-
 
 export default Discentes;

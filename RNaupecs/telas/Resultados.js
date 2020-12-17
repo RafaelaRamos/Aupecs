@@ -20,9 +20,13 @@ const ListaItens = ({ data, url }) => (
     <ItemList>
       <TextListI>Nivel: {data.nivel} </TextListI>
       <TextListI>Letra: {data.letra}</TextListI>
-      <TextListI >Erros: {data.erro}</TextListI>
       <TextListI >Data: {data.dataHora}</TextListI>
+      <TextListI >Erros: {data.erro}</TextListI>
+      <TextListI >{data.detalhes}</TextListI>
+    
+     
       <TextListII >{data.status} </TextListII>
+
     </ItemList>
     <ButtonExcluir url={url} id={data.id} />
   </ViewLista>

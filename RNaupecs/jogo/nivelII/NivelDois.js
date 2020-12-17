@@ -61,6 +61,8 @@ this.setState({
 
 
 handleSubmit =async()=>{
+
+
   var id=  await getId()
  
 try{
@@ -75,8 +77,6 @@ try{
 
   console.log(relatorio)
   const response = await api.post('/relatorio',relatorio)
-
-  console.log(response)
   this.props.navigation.navigate('Fim')
 
 }catch{
@@ -89,10 +89,14 @@ console.log('Erro')
 
 
 gameLoop=()=>{
+
+
 var index =this.state.index+1;
 
 
-if(index<5){
+if(index<=4){
+
+
   setTimeout(() => { 
     this.setState({
       letras:getArray(this.state.data[index].letras),
@@ -100,33 +104,23 @@ if(index<5){
       palavra:this.state.data[index].letras,
       img:this.state.data[index].img,
       index:index,
-     
-      
-      
-    
-    });
+     });
     
    }, 1000);
   
-
-
- 
-
 }
 
 else{
+
   this.handleSubmit()
-
+    
+  console.log('Fim')
 }
-
-
 
  }
 
  colunas=()=>{
-
-
-  return this.state.data[this.state.index].letras.length;
+ return this.state.data[this.state.index].letras.length;
  }
   
 
@@ -145,25 +139,32 @@ else{
   );
 }
 
+VerificarGabarito=()=>{
 
+  if(arrayEquals(this.state.letras,this.state.gabarito)==true){
+    
+    this.gameLoop()
+    console.log(this.state.letras, this.state.gabarito)
+
+}
+
+}
 verificar=(item,index)=>{
+
  
   if(item.letra==this.state.gabarito[index].letra){
     item.disabledDrag=true;
-    item.disabledReSorted=true
-    
+    item.disabledReSorted=true;
+
+   this.VerificarGabarito()
   }
 
-  if(arrayEquals(this.state.letras, this.state.gabarito)===true){
-    
-      this.gameLoop()
-      
 
-  }
-
-   return item
+  return item
   
     }
+
+    
      
 
     render() {

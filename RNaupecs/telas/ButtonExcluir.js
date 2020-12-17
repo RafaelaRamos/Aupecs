@@ -38,31 +38,19 @@ function openAlert(url, id) {
 }
 async function deletar(url, id) {
   try {
-
-
     const response = await api.delete(url, { params: { id: id } })
   }
-
-
   catch {
     console.log('erro!!!')
   }
 }
 
-
-
-
-
-
 const styles = StyleSheet.create({
 
   excluir: {
     flexDirection: 'row-reverse',
-
-
   }, actionButtonIcon: {
     fontSize: 20,
-
     color: '#1E90FF',
   },
 

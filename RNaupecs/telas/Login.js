@@ -67,21 +67,20 @@ import { Formik } from 'formik'
         index: 0,
         actions: [NavigationActions.navigate({ routeName: 'App' })],
       })
-
       setLoading(false)
-
       props.navigation.dispatch(resetAction)
+ 
       }else
       {
         const resetAction = StackActions.reset({
           index: 0,
           actions: [NavigationActions.navigate({ routeName: 'Aluno' })],
         })
-  
         setLoading(false)
-  
         props.navigation.dispatch(resetAction)
+      
         }
+       
     
     
     }
@@ -151,23 +150,15 @@ import { Formik } from 'formik'
             <TextBotton > Entrar</TextBotton>
   
           </Botton>
-       
-  
-  
-      </ViewSecund>
+        </ViewSecund>
   
       <ViewTerc>
-  
+
         <BntConta onPress={() =>  props.navigation.navigate('Cadast')} >
-  
-          <Text> Criar uma conta? </Text>
-  
-  
-        </BntConta>
-  
+        <Text> Criar uma conta? </Text>
+         </BntConta>
       </ViewTerc>
-  
-    </Container>)}
+   </Container>)}
     </Formik>
   
     )

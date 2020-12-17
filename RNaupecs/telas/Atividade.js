@@ -233,9 +233,11 @@ class Configura extends React.Component {
     try {
       const atividade = {
         letra: this.state.letra,
-        nivel: this.state.nivel,
+        nivel:this.state.nivel,
         idAluno: id
       }
+      console.log(this.state.nivel)
+
 
       const response = await api.post('/atividade', atividade)
 

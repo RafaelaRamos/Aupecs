@@ -22,10 +22,10 @@ public class Relatorio {
     @Transient
     private long idAluno;
     private String letra;
+    private String detalhes;
     private String nivel;
     @JsonFormat(pattern="dd-MM-yyyy HH:mm")
     private LocalDateTime dataHora = LocalDateTime.now() ;
-    private long tempo;
     private String status;
 
 

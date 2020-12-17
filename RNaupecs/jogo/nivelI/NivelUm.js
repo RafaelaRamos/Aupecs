@@ -6,7 +6,7 @@ import { randOrd, getCor, getArrayLetras } from './GameLoop'
 import { Container, Text, TextTitle, ViewJogo, Botton } from '../Styles'
 import { array } from 'prop-types';
 import api from '../../service/api';
-import { getSom } from './DataSom';
+import { getSom,getSons } from './DataSom';
 import { getId } from '../../utils';
 import Sound from 'react-native-sound';
 
@@ -26,10 +26,13 @@ class NivelUm extends PureComponent {
       limite: 2,
       erros: 0,
       sound: '',
+      som:'',
+      sons:'',
       cor: ' ',
       initialArr: [],
       status: '',
-      appSounds: ''
+      appSounds: '',
+      appSoundss:''
 
     };
   }
@@ -71,18 +74,21 @@ class NivelUm extends PureComponent {
 
   somLetra = () => {
 
-    this.state.appSounds.play()
+    this.state.appSoundss.play()
   }
   move = (letra) => {
 
     if (letra == this.state.letra) {
+     
+      this.state.appSounds.play()
 
+      
       let interval = setInterval(() => {
         this.setState({
-          y: this.state.y - 30
-
+          y: this.state.y - 10
+         
         });
-        this.state.appSounds.play()
+        
 
         if (this.state.y == 0) {
           clearInterval(interval);
@@ -106,7 +112,13 @@ class NivelUm extends PureComponent {
 
   componentDidMount() {
     let som = getSom(this.props.navigation.state.params.letra)
+    let sons=getSons(this.props.navigation.state.params.letra)
     let appSounds = new Sound(som, Sound.MAIN_BUNDLE, error => {
+      if (error) {
+        console.log("failed to load the sound", error);
+      }
+    });
+    let appSound = new Sound(sons, Sound.MAIN_BUNDLE, error => {
       if (error) {
         console.log("failed to load the sound", error);
       }
@@ -116,7 +128,8 @@ class NivelUm extends PureComponent {
       cor: getCor(),
       letra: this.props.navigation.state.params.letra,
       initialArr: this.getArray(this.state.letra),
-      appSounds: appSounds
+      appSounds: appSounds,
+      appSoundss:appSound
     });
   }
 
@@ -175,7 +188,9 @@ class NivelUm extends PureComponent {
           style={{ flex: 1 }}>
           <ViewJogo>
 
-            <TouchableOpacity>
+            <TouchableOpacity  onPress={() => {this.somLetra()}}
+            
+            >
               <TextTitle style={{ color: this.state.cor }} >{this.state.letra}</TextTitle>
             </TouchableOpacity>
           </ViewJogo>

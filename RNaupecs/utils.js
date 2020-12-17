@@ -12,10 +12,15 @@ export async function getUser() {
 export async function getId() {
  var user =  await AsyncStorage.getItem('@ListApp:userToken');
  user = JSON.parse(user)
-console.log(user.id)
+
    return user.id
   }
-
+  export async function getRoles() {
+    var user =  await AsyncStorage.getItem('@ListApp:userToken');
+    user = JSON.parse(user)
+   
+      return user.roles
+     }
 
 export async function storeUser(userToken) {
   try {
@@ -34,7 +39,6 @@ export async function deleteUser() {
   }
 }
 
-// NavigationService
 
 let navigator;
 

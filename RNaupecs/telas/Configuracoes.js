@@ -15,28 +15,19 @@ export default function Configuracoes(props) {
 
     return (
         <View>
-
-            <ButtonIcon onPress={() => props.navigation.navigate('ScreenB')}>
-
+             <ButtonIcon onPress={() => props.navigation.navigate('ScreenB')}>
                 < IconButton name="user-circle" color="#1E90FF" />
                 <TextConfig> Informações pessoais</TextConfig>
-
             </ButtonIcon>
             <ButtonIcon onPress={() => props.navigation.navigate('Senha')}>
-
                 < IconButton name="key" color="#1E90FF" />
                 <TextConfig> Trocar senha</TextConfig>
-
             </ButtonIcon>
             <ButtonIcon>
-
                 < IconButton name="user-times" color="#1E90FF" />
                 <TextConfig>Excluir conta </TextConfig>
-
             </ButtonIcon>
-
-
-        </View>
+         </View>
 
     );
 
