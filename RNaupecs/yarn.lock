@@ -6048,6 +6048,15 @@ react-native-drawer@2.5.1:
     prop-types "^15.5.8"
     tween-functions "^1.0.1"
 
+react-native-dynamically-selected-picker@^2.0.0, react-native-dynamically-selected-picker@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-dynamically-selected-picker/-/react-native-dynamically-selected-picker-2.0.1.tgz#4858561dfcfd1441354a57297cdc478278326c38"
+  integrity sha512-uwQ21Mih9KClP05RXPNjKrzTfpm328NF7Hyzlh/mAkf+I16IhB0yYpXeaVokwZJP8gclzPb/VtoZAQUQ61h6Hw==
+  dependencies:
+    prop-types "^15.7.2"
+    react-native-dynamically-selected-picker "^2.0.0"
+    react-native-linear-gradient "^2.5.6"
+
 react-native-easy-grid@0.2.2:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/react-native-easy-grid/-/react-native-easy-grid-0.2.2.tgz#f0be33620be1ebe2d2295918eb58b0a27e8272ab"
@@ -6152,6 +6161,11 @@ react-native-keyboard-aware-scroll-view@^0.5.0:
   dependencies:
     prop-types "^15.6.0"
     react-native-iphone-x-helper "^1.0.1"
+
+react-native-linear-gradient@^2.5.6:
+  version "2.5.6"
+  resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.5.6.tgz#96215cbc5ec7a01247a20890888aa75b834d44a0"
+  integrity sha512-HDwEaXcQIuXXCV70O+bK1rizFong3wj+5Q/jSyifKFLg0VWF95xh8XQgfzXwtq0NggL9vNjPKXa016KuFu+VFg==
 
 react-native-masked-text@^1.13.0:
   version "1.13.0"

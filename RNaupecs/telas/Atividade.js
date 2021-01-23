@@ -61,11 +61,11 @@ class Configura extends React.Component {
 
 
 
-  state = { letra: '', }
+  state = { letra: 'A', }
   modificarLetra = (letra) => {
     this.setState({ letra: letra })
   }
-  state = { nivel: '', }
+  state = { nivel: '1', }
   modificarNivel = (nivel) => {
     this.setState({ nivel: nivel })
   }
@@ -176,18 +176,51 @@ class Configura extends React.Component {
               </Picker>
 
             </ScrollView>
+          
             <ScrollView>
-
               <Text>Selecione a letra </Text>
+
+             
+               
               <Picker
+           
                 selectedValue={this.state.letra} onValueChange={this.modificarLetra}>
+                  
+          
+                
                 <Picker.Item label="A" value="A" />
                 <Picker.Item label="B" value="B" />
                 <Picker.Item label="C" value="C" />
-
+                <Picker.Item label="D" value="D" />
+                <Picker.Item label="E" value="E" />
+                <Picker.Item label="F" value="F" />
+                <Picker.Item label="G" value="G" />
+                <Picker.Item label="H" value="H" />
+                <Picker.Item label="I" value="I" />
+                <Picker.Item label="J" value="J" />
+                 <Picker.Item label="L" value="L" />
+                 <Picker.Item label="M" value="M" /> 
+                 <Picker.Item label="N" value="N" />
+                 <Picker.Item label="O" value="O" />
+                <Picker.Item label="P" value="P" />
+                <Picker.Item label="Q" value="Q" />
+                 <Picker.Item label="R" value="R" />
+                 <Picker.Item label="S" value="S" /> 
+                 <Picker.Item label="T" value="T" />
+                 <Picker.Item label="U" value="U" />
+                 <Picker.Item label="V" value="V" />
+                 <Picker.Item label="W" value="W" />
+                 <Picker.Item label="X" value="X" />
+                 <Picker.Item label="Y" value="Y" />
+                 <Picker.Item label="Z" value="Z" />
+                 
+             
               </Picker>
+           
+              </ScrollView>
 
-            </ScrollView>
+
+           
 
             <TouchableOpacity style={styles.botao} onPress={() => { this.salvarAtividade() }}>
 
