@@ -183,7 +183,7 @@ marginTop: 10;
 paddingHorizontal:5;
 `
 export const InputCpf = styled.TextInput`
-fontSize: 16;
+fontSize: 14;
 fontWeight: bold;
 borderTopWidth: 1;
 height: 42;
